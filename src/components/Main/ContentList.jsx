@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useParams } from 'react-router-dom'
+import LineIcon from 'react-lineicons'
 
 import { dataContext, navContext } from '../../context/context'
 import Content from './Content'
@@ -9,6 +11,8 @@ const ContentList = () => {
     const { navData } = useContext(navContext)
 
     const [toggles, setToggles] = useState([])
+
+    const { subcat } = useParams()
 
     const handleClick = (e, i) => {
         let newToggles = []
@@ -29,6 +33,24 @@ const ContentList = () => {
 
     if(loading){
         return (<Loader />)
+    }
+
+    if(items.contents.length === 0){
+        return (
+            <div style={{ marginTop: "140px", textAlign: "center" }}>
+                <LineIcon name="files" style={{ 
+                    color: "#F8F7F9",
+                    fontSize: "5rem",
+                 }} />
+                <h1 style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: "1.2rem",
+                    fontWeight: "400",
+                    color: "#F8F7F9",
+                    marginTop: "40px"
+                }}>{`No contents available for ${subcat}`}</h1>
+            </div>
+        )
     }
 
     return (

@@ -2,7 +2,7 @@ import { useContext, useRef, useEffect } from 'react'
 import LineIcon from 'react-lineicons'
 import styled from 'styled-components'
 import { useTransition, animated, config } from 'react-spring'
-import { useParams, NavLink } from 'react-router-dom'
+import { useParams, NavLink, useHistory } from 'react-router-dom'
 
 import { dataContext, navContext } from '../../context/context'
 import { fetchContents } from '../../api'
@@ -13,6 +13,7 @@ const Menu = () => {
     const menuRef = useRef(null)
 
     const { subcat, cat } = useParams()
+    const history = useHistory()
 
     const dropDown = useTransition(navData.open, {
         from: { opacity: 0, transform: "scaleY(0)", transformOrigin: "top left" },
@@ -36,8 +37,8 @@ const Menu = () => {
                     setLoading(false)
                     if(navData.headerBgHeight > 199)
                         setNavData({ ...navData, ['headerBgHeight']: 199, ['open']: !navData.open })
-                }else if(status === 404){
-                    console.log('something went wrong')
+                }else if(status === 404 || status === 502){
+                    history.push('/502')
                 }
             }
 
@@ -61,7 +62,7 @@ const Menu = () => {
                     fontSize: ".9rem",
                     fontWeight: "400",
                     color: "#12233C"
-                }}>{items.activeSubcat.subCatName}</span>
+                }}>{items.activeSubcat.subCatName !== subcat ? subcat : items.activeSubcat.subCatName}</span>
                 <LineIcon name="chevron-down" style={{ 
                     color: "#12233C",
                     float: "right",

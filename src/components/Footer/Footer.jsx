@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from 'react'
 import LineIcon from 'react-lineicons'
 import { useSpring, animated } from 'react-spring'
-import { NavLink, useRouteMatch } from 'react-router-dom'
+import { NavLink, useRouteMatch, useHistory } from 'react-router-dom'
 
 import { fetchCategories } from '../../api'
 import { dataContext, navContext } from '../../context/context'
@@ -22,6 +22,7 @@ const Footer = () => {
     const [styles, api] = useSpring(() => ({ x: 0 }))
 
     const match = useRouteMatch('/:cat/:subcat')
+    const history = useHistory()
 
     const useEffDepen = match !== null ? match.params.cat : ""
 
@@ -40,14 +41,16 @@ const Footer = () => {
             try {
                 const fetchData = async () => {
 
-                    api.start({ x: navRef.current.children[ind].firstElementChild.clientWidth * ind })
+                    const width = navRef.current.children[ind].firstElementChild.clientWidth !== 0 ? navRef.current.children[ind].firstElementChild.clientWidth : 125
+
+                    api.start({ x: width * ind })
                     
                     const { data, status } = await fetchCategories(match.params.cat)
         
                     if(status === 200){
                         setData(data) 
-                    }else if(status === 404){
-                        console.log('something went wrong')
+                    }else if(status === 404 || status === 502){
+                        history.push('/502')
                     }
                 } 
         

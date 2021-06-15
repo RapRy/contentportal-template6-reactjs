@@ -1,5 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import _ from 'lodash'
 
@@ -7,6 +7,8 @@ import { fetchCategories } from './api'
 import { dataContext, navContext } from './context/context'
 import Footer from './components/Footer/Footer'
 const Main = lazy(() => import('./components/Main/Main'))
+const FourOFour = lazy(() => import('./components/Errors/FourOFour'))
+const FiveOThree = lazy(() => import('./components/Errors/FiveOThree'))
 
 const App = () => {
   const [items, setData] = useState({})
@@ -16,6 +18,8 @@ const App = () => {
   })
   const [loading, setLoading] = useState(true)
 
+  const history = useHistory()
+
   useEffect(() => {
     try {
       const fetchInitial = async () => {
@@ -24,7 +28,7 @@ const App = () => {
         if(status === 200){
           setData(data)
         }else if(status === 404){
-          console.log('something went wrong')
+          history.push('/404')
         }
       }
 
@@ -56,9 +60,9 @@ const App = () => {
 
                     <Route exact path="/:cat/:subcat" component={Main} />
 
-                    <Route exact path="*">
-                      <Redirect to={`/${items.activeCat.catName}/${items.activeSubcat.subCatName}`} />
-                    </Route>
+                    <Route exact path="/502" component={FiveOThree} />
+
+                    <Route exact path="*" component={FourOFour} />
 
                   </Switch>
 
