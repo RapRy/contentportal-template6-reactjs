@@ -2,7 +2,7 @@
 
 # Content Portal Template 6
 
-> The main feature of this portal are the smooth animations. 
+> The main feature of this portal are the smooth animations with the use react spring and css transitions. 
 
 **Demo Link: [Template 6](https://content-portal-6.netlify.app/Apps/Dating)**
 
