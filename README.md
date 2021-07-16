@@ -2,7 +2,7 @@
 
 # Content Portal Template 6
 
-> The main feature of this portal are the smooth animations with the use of react spring and css transitions. 
+> Another portal that I rebuild using react js, the original version of this is built using html, css and javascript. This build focuses on animation especially if the user interact to the DOM elements like the menu at bottom. I also developed my own api using node js.
 
 **Demo Link: [Template 6](https://content-portal-6.netlify.app/Apps/Dating)**
 
