@@ -6,7 +6,7 @@
 
 **Demo Link: [Template 6](https://content-portal-6.netlify.app/Apps/Dating)**
 
-### Tech's used on this build
+####Tech's used on this build
 - **[React Js](https://reactjs.org/)**
 - **[React Router Dom](https://reactrouter.com/web/guides/quick-start)**
 - **[React Spring](https://react-spring.io/)**
