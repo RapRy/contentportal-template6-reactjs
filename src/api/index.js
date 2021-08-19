@@ -1,6 +1,8 @@
-import axios from 'axios'
+import axios from "axios";
 
-const url = "https://port-template-1.herokuapp.com"
+const url = "http://localhost:5000";
+// const url = "https://port-template-1.herokuapp.com"
 
-export const fetchCategories = (cat) => axios.get(`${url}/template9/categories/${cat}`)
-export const fetchContents = (cat, subcat) => axios.get(`${url}/template9/contents/${cat}/${subcat}`)
+export const fetchCategories = () => axios.get(`${url}/categories`);
+export const fetchContents = (cat) =>
+  axios.get(`${url}/contents/${cat}?group=sub`);
