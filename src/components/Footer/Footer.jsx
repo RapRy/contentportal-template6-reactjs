@@ -48,7 +48,6 @@ const Footer = () => {
           const { data, status } = await fetchContents(match.params.cat);
 
           if (status === 200) {
-            console.log(items.categories[ind].subCategories[0]);
             setData({
               ...items,
               activeCat: items.categories[ind],
@@ -66,6 +65,7 @@ const Footer = () => {
         console.log(error);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [useEffDepen]);
 
   return (

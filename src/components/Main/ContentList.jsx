@@ -32,9 +32,9 @@ const ContentList = () => {
     setToggles(newToggles);
   }, [items.contents]);
 
-  //   if (loading) {
-  //     return <Loader />;
-  //   }
+  if (loading) {
+    return <Loader />;
+  }
 
   if (items.contents.length === 0) {
     return (

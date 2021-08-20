@@ -5,7 +5,7 @@ import { useTransition, animated, config } from "react-spring";
 import { useParams, NavLink, useHistory } from "react-router-dom";
 
 import { dataContext, navContext } from "../../context/context";
-import { fetchContents } from "../../api";
+import { fetchContentsSubcat } from "../../api";
 
 const Menu = () => {
   const { items, setData, setLoading } = useContext(dataContext);
@@ -36,10 +36,10 @@ const Menu = () => {
 
     try {
       const fetchData = async () => {
-        const { data, status } = await fetchContents(cat, subcat);
+        const { data, status } = await fetchContentsSubcat(cat, subcat);
 
         if (status === 200) {
-          setData({ ...items, contents: data });
+          setData({ ...items, contents: data.data });
           setLoading(false);
           if (navData.headerBgHeight > 199)
             setNavData({
@@ -52,11 +52,12 @@ const Menu = () => {
         }
       };
 
-      // fetchData();
+      fetchData();
     } catch (error) {
       console.log(error);
     }
-  }, [subcat, cat, history, items, navData, setData, setLoading, setNavData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subcat]);
 
   return (
     <div>
